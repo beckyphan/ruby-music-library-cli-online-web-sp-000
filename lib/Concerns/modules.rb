@@ -13,6 +13,14 @@ module Concerns
     def name=(name)
       @name = name
     end
+
+    def name
+      self.name
+    end
+
+    def name=(name)
+      self.name = name
+    end
   end
 
   module Instance_all
@@ -22,6 +30,11 @@ module Concerns
 
     def save
       self.class.all << self
+      self.name = name
+    end
+
+    def save
+      self.all << self
     end
   end
 
@@ -33,6 +46,7 @@ module Concerns
     def create(object)
       instance = self.new(object).tap do |i|
         i.name = object
+        i.name = artist
         i.save
       end
     end
